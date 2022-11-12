@@ -38,13 +38,13 @@ class MyATM {
     return false;
   }
 
-  public boolean retrieveAccounts() throws Exception {
+  public Account[] retrieveAccounts() throws Exception {
     try {
       this.accounts = Server.retrieveAccounts(this.card); // Retrieve account information from the server
     } catch (Exception e) {
       throw e;
     }
-    return true;
+    return this.accounts;
   }
   
   public int getBalance(int i) {
@@ -71,6 +71,7 @@ class MyATM {
   
   class Account {
     int balance;
+    String accountNum;
     
     public Account() { }
   }
