@@ -13,7 +13,7 @@ class MyATM {
   }
 
   Card card;
-  Account account;
+  Account[] accounts;
 
   public void insertCard(Card card) throws Exception {
     try {
@@ -37,38 +37,38 @@ class MyATM {
     return false;
   }
 
-  public boolean RetrieveAccount(String accountNum) throws Exception {
+  public boolean RetrieveAccount(Card card) throws Exception {
     try {
-      this.account = Server.retrieveAccount(accountNum); // Retrieve account information from the server
+      this.accounts = Server.retrieveAccounts(card); // Retrieve account information from the server
     } catch (Exception e) {
       throw e;
     }
     return true;
   }
   
-  public Account selectAccount(String accountNum) throws Exception {
+  public Account[] selectAccount(String accountNum) throws Exception {
     if (RetrieveAccount(accountNum)) { // Retrieve account information from the server
-      return this.account;
+      return this.accounts;
     }
     
     return null;
   }
   
-  public int getBalance() {
-    return this.account.balance;
+  public int getBalance(int i) {
+    return this.accounts[i].balance;
   }
   
-  public void deposit(int num) {
+  public void deposit(int i, int num) {
     this.balance += num;
-    this.account.balance += num;
-    Server.updateBalance(this.account); // Let the server know
+    this.accounts[i].balance += num;
+    Server.updateBalance(this.accounts[i]); // Let the server know
   }
   
-  public void withdraw(int num) {
-    if (this.balance >= num && this.account.balance >= num) {
+  public void withdraw(int i, int num) {
+    if (this.balance >= num && this.accounts[i].balance >= num) {
       this.balance -= num;
-      this.account.balance -= num;
-      Server.updateBalance(this.account); // Let the server know
+      this.accounts[i].balance -= num;
+      Server.updateBalance(this.accounts[i]); // Let the server know
     }
   }
   
