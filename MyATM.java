@@ -37,7 +37,7 @@ class MyATM {
     return false;
   }
 
-  public boolean RetrieveAccount() throws Exception {
+  public boolean retrieveAccount() throws Exception {
     try {
       this.accounts = Server.retrieveAccounts(this.card); // Retrieve account information from the server
     } catch (Exception e) {
@@ -47,7 +47,7 @@ class MyATM {
   }
   
   public Account[] selectAccount(String accountNum) throws Exception {
-    if (RetrieveAccount(accountNum)) { // Retrieve account information from the server
+    if (retrieveAccount(accountNum)) { // Retrieve account information from the server
       return this.accounts;
     }
     
