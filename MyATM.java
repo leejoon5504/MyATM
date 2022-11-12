@@ -37,9 +37,9 @@ class MyATM {
     return false;
   }
 
-  public boolean RetrieveAccount(Card card) throws Exception {
+  public boolean RetrieveAccount() throws Exception {
     try {
-      this.accounts = Server.retrieveAccounts(card); // Retrieve account information from the server
+      this.accounts = Server.retrieveAccounts(this.card); // Retrieve account information from the server
     } catch (Exception e) {
       throw e;
     }
