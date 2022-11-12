@@ -29,6 +29,7 @@ class MyATM {
       if (Server.validatePin(this.card, pin)) { // Send PIN to the server and validate
         return true;
       } else {
+        this.card = null;
         return false;
       }
     } catch (Exception e) {
@@ -37,21 +38,13 @@ class MyATM {
     return false;
   }
 
-  public boolean retrieveAccount() throws Exception {
+  public boolean retrieveAccounts() throws Exception {
     try {
       this.accounts = Server.retrieveAccounts(this.card); // Retrieve account information from the server
     } catch (Exception e) {
       throw e;
     }
     return true;
-  }
-  
-  public Account[] selectAccount(String accountNum) throws Exception {
-    if (retrieveAccount(accountNum)) { // Retrieve account information from the server
-      return this.accounts;
-    }
-    
-    return null;
   }
   
   public int getBalance(int i) {
